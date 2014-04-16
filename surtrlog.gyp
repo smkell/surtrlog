@@ -23,6 +23,19 @@
                     'include'
                 ]
             }
+        },
+        {
+            'target_name': 'surtrlog_tests',
+            'type': 'executable',
+
+            'sources': [
+                'tests/surtrlog_test.cc',
+            ],
+
+            'dependencies': [
+                'surtrlog',
+                '<(gtest_dir)/gtest.gyp:gtest_main',
+            ],
         }
     ]
 }
