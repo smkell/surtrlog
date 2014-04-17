@@ -12,8 +12,8 @@ namespace surtrlog {
 
 	class Logger {
 	public:
-		Logger();
-		virtual ~Logger();
+		Logger() {}
+		virtual ~Logger() {}
 
 		template<typename Level>
 		LogLevel& Log() {

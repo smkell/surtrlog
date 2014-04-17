@@ -3,10 +3,6 @@
 #include <iostream>
 #include <string>
 
-surtrlog::Logger::Logger() {}
-
-surtrlog::Logger::~Logger() {}
-
 surtrlog::LogLevel::LogLevel() 
 	: mBuf(std::cout.rdbuf())
 	, mHeader("") {
@@ -39,13 +35,12 @@ std::string surtrlog::LogLevel::header(std::string header) {
 	return old;
 }
 
-surtrlog::Default surtrlog::Default::sInstance;
-surtrlog::Default& surtrlog::Default::GetInstance() {
-	return sInstance;
+namespace surtrlog {
+	Debug Debug::sInstance;
+	Default Default::sInstance;
+	Info Info::sInstance;
+	Warn Warn::sInstance;
+	Error Error::sInstance;
 }
 
-surtrlog::Info surtrlog::Info::sInstance;
-surtrlog::Info& surtrlog::Info::GetInstance() {
-	return sInstance;
-}
 

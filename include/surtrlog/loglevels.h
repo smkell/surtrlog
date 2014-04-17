@@ -25,7 +25,7 @@ namespace surtrlog {
 
 	class Default : public LogLevel {
 	public:
-		static Default& GetInstance();
+		static Default& GetInstance() { return sInstance; }
 
 	private:
 		static Default sInstance;
@@ -33,13 +33,46 @@ namespace surtrlog {
 
 	class Info : public LogLevel {
 	public:
-		static Info& GetInstance();
+		static Info& GetInstance() { return sInstance; }
 
 	protected:
 		Info() : LogLevel("INFO") {}
 
 	private:
 		static Info sInstance;
+	};
+
+	class Debug : public LogLevel {
+	public:
+		static Debug& GetInstance() { return sInstance; }
+
+	protected:
+		Debug() : LogLevel("DEBUG") {}
+
+	private:
+		static Debug sInstance;
+	};
+
+	class Warn : public LogLevel {
+	public:
+		static Warn& GetInstance() { return sInstance; }
+
+	protected:
+		Warn() : LogLevel("WARN") {}
+
+	private:
+		static Warn sInstance;
+	};
+
+	class Error : public LogLevel {
+	public:
+		static Error& GetInstance() { return sInstance; }
+
+	protected:
+		Error() : LogLevel("ERROR") {}
+
+	private:
+		static Error sInstance;
 	};
 
 	static surtrlog::LogLevel& operator <<(surtrlog::LogLevel& level, std::string msg) {
