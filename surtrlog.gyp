@@ -22,7 +22,9 @@
                 'include_dirs': [
                     'include'
                 ]
-            }
+            },
+
+            'cflags+': [ '-Wno-unused-function']
         },
         {
             'target_name': 'surtrlog_tests',
