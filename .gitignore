@@ -1,6 +1,9 @@
 *.sln
 *.vcxproj
 *.vcxproj.filters
+*.opensdf
+*.sdf
+*.suo
 out
 Debug
 Release

@@ -9,9 +9,11 @@
             'type': '<(library)',
 
             'sources': [
-                'src/logger.cc',
+                'src/loglevels.cc',
                 'include/surtrlog/surtrlog.h',
                 'include/surtrlog/version.h',
+                'include/surtrlog/logger.h',
+                'include/surtrlog/loglevels.h'
             ],
 
             'include_dirs': [
@@ -22,7 +24,9 @@
                 'include_dirs': [
                     'include'
                 ]
-            }
+            },
+
+            'cflags+': [ '-Wno-unused-function']
         },
         {
             'target_name': 'surtrlog_tests',
