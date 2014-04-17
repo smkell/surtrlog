@@ -46,3 +46,58 @@ TEST(DebugLogger, WritesCorrectHeader) {
 
 	EXPECT_EQ(expect, actual);
 }
+
+TEST(WarnLogger, WritesCorrectHeader) {
+    surtrlog::Logger logger;
+
+    std::ostringstream out;
+    logger.Log<surtrlog::Warn>().rdbuf(out.rdbuf());
+
+    auto input = "This is a test.";
+    logger.Log<surtrlog::Warn>() << input;
+
+    auto expect = "[ WARN ] This is a test.";
+    auto actual = out.str();
+
+    EXPECT_EQ(expect, actual);
+}
+
+TEST(ErrorLogger, WritesCorrectHeader) {
+    surtrlog::Logger logger;
+
+    std::ostringstream out;
+    logger.Log<surtrlog::Error>().rdbuf(out.rdbuf());
+
+    auto input = "This is a test.";
+    logger.Log<surtrlog::Error>() << input;
+
+    auto expect = "[ ERROR ] This is a test.";
+    auto actual = out.str();
+
+    EXPECT_EQ(expect, actual);
+}
+
+class Custom : public surtrlog::LogLevel {
+public:
+    static Custom& GetInstance() { return sInstance; }
+protected:
+    Custom() : LogLevel("CUSTOM") {}
+private:
+    static Custom sInstance;
+};
+Custom Custom::sInstance;
+
+TEST(CustomLogger, WritesCorrectHeader) {
+    surtrlog::Logger logger;
+
+    std::ostringstream out;
+    logger.Log<Custom>().rdbuf(out.rdbuf());
+
+    auto input = "This is a test.";
+    logger.Log<Custom>() << input;
+
+    auto expect = "[ CUSTOM ] This is a test.";
+    auto actual = out.str();
+
+    EXPECT_EQ(expect, actual);
+}
