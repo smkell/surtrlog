@@ -7,7 +7,7 @@ TEST(DefaultLogger, WriteToStreamBuf) {
 	surtrlog::Logger logger;
 
 	std::ostringstream out;
-	logger.Log().rdbuf(out.rdbuf());
+	logger.rdbuf<surtrlog::Default>(out.rdbuf());
 
 	auto expect = "This is a test.";
 	logger.Log() << expect;
@@ -21,7 +21,7 @@ TEST(InfoLogger, WritesCorrectHeader) {
 	surtrlog::Logger logger;
 
 	std::ostringstream out;
-	logger.Log<surtrlog::Info>().rdbuf(out.rdbuf());
+	logger.rdbuf<surtrlog::Info>(out.rdbuf());
 
 	auto input = "This is a test.";
 	logger.Log<surtrlog::Info>() << input;
@@ -36,12 +36,28 @@ TEST(DebugLogger, WritesCorrectHeader) {
 	surtrlog::Logger logger;
 
 	std::ostringstream out;
-	logger.Log<surtrlog::Debug>().rdbuf(out.rdbuf());
+	logger.rdbuf<surtrlog::Debug>(out.rdbuf());
 
 	auto input = "This is a test.";
 	logger.Log<surtrlog::Debug>() << input;
 
 	auto expect = "[ DEBUG ] This is a test.";
+	auto actual = out.str();
+
+	EXPECT_EQ(expect, actual);
+}
+
+TEST(DebugLogger, WritesHeaderOnlyOncePerStatement) {
+	surtrlog::Logger logger;
+
+	std::ostringstream out;
+	logger.rdbuf<surtrlog::Debug>(out.rdbuf());
+
+	auto input1 = "This is a test. ";
+	auto input2 = "1..2..3..";
+	logger.Log<surtrlog::Debug>() << input1 << input2;
+
+	auto expect = "[ DEBUG ] This is a test. 1..2..3..";
 	auto actual = out.str();
 
 	EXPECT_EQ(expect, actual);

@@ -76,14 +76,7 @@ namespace surtrlog {
 	};
 
 	static surtrlog::LogLevel& operator <<(surtrlog::LogLevel& level, std::string msg) {
-		std::ostringstream out;
-		if (level.header() != "") {
-			out << "[ " << level.header() << " ] " << msg;	
-		} else {
-			out << msg;
-		}
-		
-		level.rdbuf()->sputn(out.str().c_str(), out.str().length());
+		level.rdbuf()->sputn(msg.c_str(), msg.length());
 		return level;
 	}
 }

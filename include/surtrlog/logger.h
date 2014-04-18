@@ -15,9 +15,20 @@ namespace surtrlog {
 		Logger() {}
 		virtual ~Logger() {}
 
-		template<typename Level>
+		template<class Level>
+		std::streambuf* rdbuf() {
+			return Level::GetInstance().rdbuf();
+		}
+
+		template<class Level>
+		void rdbuf(std::streambuf* buf) {
+			Level::GetInstance().rdbuf(buf);
+		}
+
+		template<class Level>
 		LogLevel& Log() {
-			return Level::GetInstance();
+			Level& level = static_cast<Level&>(Level::GetInstance());
+			return level << "[ " << level.header() << " ] ";
 		}
 
 		LogLevel& Log() {
