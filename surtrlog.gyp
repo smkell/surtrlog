@@ -9,9 +9,11 @@
             'type': '<(library)',
 
             'sources': [
-                'src/logger.cc',
+                'src/loglevels.cc',
                 'include/surtrlog/surtrlog.h',
                 'include/surtrlog/version.h',
+                'include/surtrlog/logger.h',
+                'include/surtrlog/loglevels.h'
             ],
 
             'include_dirs': [
