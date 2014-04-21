@@ -75,8 +75,17 @@ namespace surtrlog {
 		static Error sInstance;
 	};
 
+	enum Manipulators : char {
+		endl = '\n',
+	};
+
 	static surtrlog::LogLevel& operator <<(surtrlog::LogLevel& level, std::string msg) {
 		level.rdbuf()->sputn(msg.c_str(), msg.length());
+		return level;
+	}
+
+	static surtrlog::LogLevel& operator <<(surtrlog::LogLevel& level, surtrlog::Manipulators manip) {
+		level.rdbuf()->sputc(static_cast<char>(manip));
 		return level;
 	}
 }
