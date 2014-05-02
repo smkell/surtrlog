@@ -1,0 +1,13 @@
+Weyland::build.package = Weyland::package do |pkg|
+	pkg.name = "surtrlog"
+
+	pkg.static_library do |t|
+		t.name = "surtrlog"
+		t.sources = [ "src/loglevels.cc" ]
+		t.include_dirs = [ "include" ]
+
+		t.exports = {
+			include_dirs: t.include_dirs
+		}
+	end
+end
