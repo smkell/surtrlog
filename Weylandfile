@@ -1,4 +1,4 @@
-Weyland::build.package = Weyland::package do |pkg|
+Weyland::root = Weyland::package do |pkg|
 	pkg.name = "surtrlog"
 
 	pkg.static_library do |t|
